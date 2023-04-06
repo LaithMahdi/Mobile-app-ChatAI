@@ -1,15 +1,17 @@
 import 'package:chat_ai/helper/color.dart';
 import 'package:flutter/material.dart';
 
-Widget textFormCustomer({
+Widget textFormCustom({
   required TextEditingController controller,
   required String hintText,
+  required TextInputType keyboradType,
 }) =>
     TextFormField(
       controller: controller,
+      keyboardType: keyboradType,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 15,
+          horizontal: 25,
           vertical: 20,
         ),
         border: OutlineInputBorder(

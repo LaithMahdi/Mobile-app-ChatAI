@@ -1,4 +1,3 @@
-import 'package:chat_ai/widgets/logo.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,9 +14,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Row(
-              children: [
-                logo(),
-              ],
+              children: const [],
             ),
           ],
         ),
