@@ -70,9 +70,17 @@ class SignIn extends StatelessWidget {
                 isIcon: false,
                 onPressed: () {
                   if (emailController.text.isEmpty) {
-                    snackbar(title: "Alert", message: "Mail required");
+                    snackbar(
+                      title: "Alert",
+                      message: "Mail required",
+                      isAlert: true,
+                    );
                   } else if (passwordController.text.isEmpty) {
-                    snackbar(title: "Alert", message: "Password required");
+                    snackbar(
+                      title: "Alert",
+                      message: "Password required",
+                      isAlert: true,
+                    );
                   } else {
                     sharedPref!.setBool("isAuth", true);
                   }
