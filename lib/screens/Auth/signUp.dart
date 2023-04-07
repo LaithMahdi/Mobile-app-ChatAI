@@ -92,6 +92,7 @@ class SignUp extends StatelessWidget {
                         isIcon: false,
                         onPressed: () {
                           controller.Auth();
+                          controller.addUser;
                         },
                       ),
               ),

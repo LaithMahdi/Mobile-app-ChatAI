@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../helper/snackBar.dart';
 
 class SignController extends GetxController {
@@ -9,10 +9,22 @@ class SignController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   void showLoading() {
     isload = !isload;
     update();
+  }
+
+  Future<void> addUser() {
+    return users
+        .add({
+          "Name": nameController.text.toString(),
+          "Mail": emailController.text.toString(),
+          "Password": passwordController.text.toString(),
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 
   void Auth() async {
@@ -21,6 +33,7 @@ class SignController extends GetxController {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailController.text, password: passwordController.text);
+      //addUser;
       Future.delayed(
         const Duration(milliseconds: 10),
         () {
@@ -60,4 +73,3 @@ class SignController extends GetxController {
     showLoading();
   }
 }
-//mahdi@gmail.com
