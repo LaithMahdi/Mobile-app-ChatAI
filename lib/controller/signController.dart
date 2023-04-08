@@ -11,13 +11,6 @@ class SignController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   nameController.text = "";
-  //   emailController.text = "";
-  //   passwordController.text = "";
-  // }
 
   @override
   void dispose() {

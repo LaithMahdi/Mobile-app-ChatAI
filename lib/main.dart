@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'middleware/authMiddleware.dart';
+
 SharedPreferences? sharedPref;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +36,11 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen()),
-        GetPage(name: "/login", page: () => const SignIn()),
+        GetPage(
+          name: "/login",
+          page: () => const SignIn(),
+          middlewares: [AuthMiddleware()],
+        ),
         GetPage(name: "/signUp", page: () => const SignUp()),
         GetPage(
           name: "/home",
