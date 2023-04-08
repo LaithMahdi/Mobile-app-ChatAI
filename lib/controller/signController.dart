@@ -21,23 +21,6 @@ class SignController extends GetxController {
     super.dispose();
   }
 
-  void showLoading() {
-    isload = !isload;
-    update();
-  }
-
-  Future<void> addUser() {
-    return users
-        .add({
-          "Name": nameController.text,
-          "Mail": emailController.text,
-          "Password": passwordController.text,
-          "Picture": "",
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
-  }
-
   void loginAccount() async {
     showLoading();
     try {
@@ -46,6 +29,9 @@ class SignController extends GetxController {
         password: passwordController.text,
       );
       Get.offNamed("/home");
+      nameController.text = "";
+      emailController.text = "";
+      passwordController.text = "";
       sharedPref!.setBool("login", true);
     } on FirebaseAuthException catch (e) {
       showLoading();
@@ -73,6 +59,23 @@ class SignController extends GetxController {
       showLoading();
     }
     showLoading();
+  }
+
+  void showLoading() {
+    isload = !isload;
+    update();
+  }
+
+  Future<void> addUser() {
+    return users
+        .add({
+          "Name": nameController.text.trim(),
+          "Mail": emailController.text.trim(),
+          "Password": passwordController.text.trim(),
+          "Picture": "",
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 
   void createAccount() async {

@@ -1,13 +1,12 @@
 import 'package:chat_ai/screens/Auth/sigIn.dart';
 import 'package:chat_ai/screens/Auth/signUp.dart';
-import 'package:chat_ai/screens/HomeScreen.dart';
+import 'package:chat_ai/screens/homeScreen.dart';
 import 'package:chat_ai/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'middleware/authMiddleware.dart';
 
 SharedPreferences? sharedPref;
@@ -22,8 +21,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

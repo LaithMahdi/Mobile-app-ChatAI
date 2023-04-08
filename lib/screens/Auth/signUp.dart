@@ -86,9 +86,11 @@ class SignUp extends StatelessWidget {
               GetBuilder<SignController>(
                 init: SignController(),
                 builder: (c) => c.isload
-                    ? const CircularProgressIndicator(
-                        backgroundColor: lightBlue,
-                        color: gray,
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: lightBlue,
+                          color: gray,
+                        ),
                       )
                     : customButton(
                         title: "Sign Up",

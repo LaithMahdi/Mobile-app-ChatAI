@@ -13,32 +13,32 @@ Widget customAppBar() => Card(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Builder(
-              builder: (context) => GestureDetector(
-                child: const Text(
-                  "Chats",
-                  style: TextStyle(
-                    color: black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-                onTap: () => Scaffold.of(context).openDrawer(),
+            const Text(
+              "Chats",
+              style: TextStyle(
+                color: black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
               ),
             ),
             Image.asset(
               "assets/images/logoE.png",
               width: Get.width * 0.1,
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                FontAwesomeIcons.gear,
-                size: 25,
-                color: black,
+            Builder(
+              builder: (context) => GestureDetector(
+                child: IconButton(
+                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                  icon: const Icon(
+                    FontAwesomeIcons.bars,
+                    size: 25,
+                    color: black,
+                  ),
+                ),
+                onTap: () => Scaffold.of(context).openEndDrawer(),
               ),
-            )
+            ),
           ],
         ),
       ),
