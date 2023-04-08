@@ -1,3 +1,4 @@
+import 'package:chat_ai/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,22 @@ class SignController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   nameController.text = "";
+  //   emailController.text = "";
+  //   passwordController.text = "";
+  // }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    nameController.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   void showLoading() {
     isload = !isload;
@@ -19,21 +36,58 @@ class SignController extends GetxController {
   Future<void> addUser() {
     return users
         .add({
-          "Name": nameController.text.toString(),
-          "Mail": emailController.text.toString(),
-          "Password": passwordController.text.toString(),
+          "Name": nameController.text,
+          "Mail": emailController.text,
+          "Password": passwordController.text,
+          "Picture": "",
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  void Auth() async {
+  void loginAccount() async {
+    showLoading();
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Get.offNamed("/home");
+      sharedPref!.setBool("login", true);
+    } on FirebaseAuthException catch (e) {
+      showLoading();
+      if (e.code == 'user-not-found') {
+        snackbar(
+          title: "Alert",
+          message: "No user found for that email.",
+          isAlert: true,
+        );
+        showLoading();
+      } else if (e.code == 'wrong-password') {
+        snackbar(
+          title: "Alert",
+          message: "Wrong password provided for that user.",
+          isAlert: true,
+        );
+        showLoading();
+      }
+    } catch (e) {
+      snackbar(
+        title: "Alert",
+        message: "$e",
+        isAlert: true,
+      );
+      showLoading();
+    }
+    showLoading();
+  }
+
+  void createAccount() async {
     showLoading();
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailController.text, password: passwordController.text);
-      //addUser;
       Future.delayed(
         const Duration(milliseconds: 10),
         () {
@@ -42,7 +96,11 @@ class SignController extends GetxController {
             message: "Your account has been created with successfuly",
             isAlert: false,
           );
+          addUser();
           Get.toNamed("/login");
+          nameController.text = "";
+          emailController.text = "";
+          passwordController.text = "";
         },
       );
     } on FirebaseAuthException catch (e) {

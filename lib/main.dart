@@ -1,5 +1,6 @@
 import 'package:chat_ai/screens/Auth/sigIn.dart';
 import 'package:chat_ai/screens/Auth/signUp.dart';
+import 'package:chat_ai/screens/HomeScreen.dart';
 import 'package:chat_ai/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -35,6 +36,12 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/", page: () => const SplashScreen()),
         GetPage(name: "/login", page: () => const SignIn()),
         GetPage(name: "/signUp", page: () => const SignUp()),
+        GetPage(
+          name: "/home",
+          page: () => const HomeScreen(),
+          transition: Transition.fade,
+          transitionDuration: const Duration(milliseconds: 500),
+        ),
       ],
     );
   }

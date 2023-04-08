@@ -27,10 +27,10 @@ void snackbar({
               size: 25,
               color: lightGray,
             )
-          : Icon(
+          : const Icon(
               FontAwesomeIcons.circleCheck,
               size: 25,
-              color: Colors.green.shade600,
+              color: lightGray,
             ),
       snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 2),

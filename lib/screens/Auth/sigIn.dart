@@ -1,10 +1,9 @@
 import 'package:chat_ai/helper/color.dart';
-import 'package:chat_ai/helper/snackBar.dart';
-import 'package:chat_ai/main.dart';
 import 'package:chat_ai/widgets/textFormCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import '../../controller/signController.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customLine.dart';
 
@@ -13,8 +12,8 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    final controller = Get.put(SignController());
+
     return Scaffold(
       backgroundColor: black,
       body: SafeArea(
@@ -54,38 +53,51 @@ class SignIn extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               textFormCustom(
-                controller: emailController,
+                controller: controller.emailController,
                 hintText: "Email",
                 keyboradType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 10),
               textFormCustom(
-                controller: passwordController,
+                controller: controller.passwordController,
                 hintText: "password",
                 keyboradType: TextInputType.visiblePassword,
               ),
               const SizedBox(height: 20),
-              customButton(
-                title: "Log In",
-                isIcon: false,
-                onPressed: () {
-                  if (emailController.text.isEmpty) {
-                    snackbar(
-                      title: "Alert",
-                      message: "Mail required",
-                      isAlert: true,
-                    );
-                  } else if (passwordController.text.isEmpty) {
-                    snackbar(
-                      title: "Alert",
-                      message: "Password required",
-                      isAlert: true,
-                    );
-                  } else {
-                    sharedPref!.setBool("isAuth", true);
-                  }
-                },
+              GetBuilder<SignController>(
+                init: SignController(),
+                builder: (c) => c.isload
+                    ? const CircularProgressIndicator(
+                        backgroundColor: lightBlue,
+                        color: gray,
+                      )
+                    : customButton(
+                        title: "Log In",
+                        isIcon: false,
+                        onPressed: () => controller.loginAccount(),
+                      ),
               ),
+              // customButton(
+              //   title: "Log In",
+              //   isIcon: false,
+              //   onPressed: () {
+              //   if (emailController.text.isEmpty) {
+              //     snackbar(
+              //       title: "Alert",
+              //       message: "Mail required",
+              //       isAlert: true,
+              //     );
+              //   } else if (passwordController.text.isEmpty) {
+              //     snackbar(
+              //       title: "Alert",
+              //       message: "Password required",
+              //       isAlert: true,
+              //     );
+              //   } else {
+              //     sharedPref!.setBool("isAuth", true);
+              //   }
+              //   },
+              // ),
               const SizedBox(height: 20),
               customLine(),
               const SizedBox(height: 20),

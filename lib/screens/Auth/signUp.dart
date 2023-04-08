@@ -90,10 +90,7 @@ class SignUp extends StatelessWidget {
                     : customButton(
                         title: "Log In",
                         isIcon: false,
-                        onPressed: () {
-                          controller.Auth();
-                          controller.addUser;
-                        },
+                        onPressed: () => controller.createAccount(),
                       ),
               ),
 
