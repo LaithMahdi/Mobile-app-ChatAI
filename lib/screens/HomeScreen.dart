@@ -13,22 +13,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
-    return Scaffold(
-      drawer: customDrawer(onTap: () => controller.logout()),
-      body: SafeArea(
-          child: GetBuilder<HomeController>(
-        init: HomeController(),
-        builder: (c) => c.isload
-            ? Column(
-                children: const [
-                  CircularProgressIndicator(
-                    backgroundColor: lightBlue,
-                    color: gray,
-                  ),
-                  Text("Deconnect"),
-                ],
-              )
-            : Column(
+    return controller.isload
+        ? const CircularProgressIndicator()
+        : Scaffold(
+            drawer: customDrawer(onTap: () => controller.logout()),
+            body: SafeArea(
+              child: Column(
                 children: [
                   customAppBar(),
                   //const SizedBox(height: 10),
@@ -39,8 +29,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-      )),
-    );
+            ),
+          );
   }
 }
 

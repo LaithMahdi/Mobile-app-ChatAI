@@ -10,9 +10,10 @@ class HomeController extends GetxController {
   }
 
   void logout() async {
+    showLoading();
     await FirebaseAuth.instance.signOut();
     sharedPref!.setBool("login", false);
-    Get.offNamed("/login");
-    showLoading();
+    Future.delayed(const Duration(seconds: 2),
+        () => Get.offNamed("/login")); //s;howLoading();
   }
 }

@@ -9,6 +9,12 @@ Widget textFormCustom({
     TextFormField(
       controller: controller,
       keyboardType: keyboradType,
+      cursorColor: black,
+      style: const TextStyle(
+        fontSize: 16,
+        color: gray,
+        fontWeight: FontWeight.w700,
+      ),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 25,

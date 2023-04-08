@@ -1,5 +1,6 @@
 import 'package:chat_ai/helper/color.dart';
 import 'package:chat_ai/widgets/textFormCustom.dart';
+import 'package:chat_ai/widgets/textFormPasswordCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class SignIn extends StatelessWidget {
                 keyboradType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 10),
-              textFormCustom(
+              textFormPasswordCustom(
                 controller: controller.passwordController,
                 hintText: "password",
                 keyboradType: TextInputType.visiblePassword,
@@ -77,27 +78,6 @@ class SignIn extends StatelessWidget {
                         onPressed: () => controller.loginAccount(),
                       ),
               ),
-              // customButton(
-              //   title: "Log In",
-              //   isIcon: false,
-              //   onPressed: () {
-              //   if (emailController.text.isEmpty) {
-              //     snackbar(
-              //       title: "Alert",
-              //       message: "Mail required",
-              //       isAlert: true,
-              //     );
-              //   } else if (passwordController.text.isEmpty) {
-              //     snackbar(
-              //       title: "Alert",
-              //       message: "Password required",
-              //       isAlert: true,
-              //     );
-              //   } else {
-              //     sharedPref!.setBool("isAuth", true);
-              //   }
-              //   },
-              // ),
               const SizedBox(height: 20),
               customLine(),
               const SizedBox(height: 20),
