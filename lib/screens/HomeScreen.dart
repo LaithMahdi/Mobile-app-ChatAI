@@ -14,10 +14,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     return Scaffold(
-      endDrawer: customEndDrawer(
-        accountName: controller.auth.currentUser!.displayName.toString(),
-        accountEmail: controller.auth.currentUser!.email.toString(),
-        accountPicture: controller.auth.currentUser!.photoURL.toString(),
+      endDrawer: GetBuilder<HomeController>(
+        init: HomeController(),
+        builder: (c) => c.snapshot.exists
+            ? customEndDrawer(
+                accountName: controller.user.name.toString(),
+                accountEmail: controller.user.email.toString(),
+                accountPicture: controller.user.picture.toString(),
+              )
+            : const CircularProgressIndicator(),
       ),
       body: SafeArea(
         child: Column(

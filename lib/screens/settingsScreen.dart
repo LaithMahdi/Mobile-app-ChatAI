@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
               flex: 10,
               child: SingleChildScrollView(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,6 +96,7 @@ class SettingsScreen extends StatelessWidget {
                     GetBuilder<SettingsController>(
                       init: SettingsController(),
                       builder: (controller) => ListTile(
+                        contentPadding: EdgeInsets.zero,
                         title: const Text(
                           "Dark mode",
                           style: TextStyle(
@@ -158,6 +159,26 @@ class SettingsScreen extends StatelessWidget {
                       icon: FontAwesomeIcons.gears,
                       onTap: () {},
                     ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      "Other",
+                      style: TextStyle(
+                        color: textHint,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    settingsItem(
+                      title: "Feedback and Support",
+                      icon: FontAwesomeIcons.commentDots,
+                      onTap: () {},
+                    ),
+                    settingsItem(
+                      title: "About the app",
+                      icon: FontAwesomeIcons.circleInfo,
+                      onTap: () {},
+                    ),
                   ],
                 ),
               ),
@@ -175,6 +196,7 @@ Widget settingsItem({
   required VoidCallback onTap,
 }) =>
     ListTile(
+      contentPadding: EdgeInsets.zero,
       title: Text(
         title,
         style: const TextStyle(

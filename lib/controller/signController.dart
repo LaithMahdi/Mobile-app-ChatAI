@@ -10,7 +10,18 @@ class SignController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final _db = FirebaseFirestore.instance;
+  final _credential = FirebaseAuth.instance;
+
+  getUid() {
+    String? uid;
+    User? user = _credential.currentUser;
+    if (user != null) {
+      uid = user.uid;
+      print(uid);
+    }
+    return uid;
+  }
 
   @override
   void dispose() {
@@ -24,9 +35,9 @@ class SignController extends GetxController {
   void loginAccount() async {
     showLoading();
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+      await _credential.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
       Get.offNamed("/home");
       nameController.text = "";
@@ -67,12 +78,15 @@ class SignController extends GetxController {
   }
 
   Future<void> addUser() {
-    return users
-        .add({
-          "Name": nameController.text.trim(),
-          "Mail": emailController.text.trim(),
-          "Password": passwordController.text.trim(),
-          "Picture": "",
+    return _db
+        .collection("users")
+        .doc(getUid())
+        .set({
+          "uid": getUid(),
+          "name": nameController.text.trim(),
+          "mail": emailController.text.trim(),
+          "password": passwordController.text.trim(),
+          "picture": "",
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -81,9 +95,11 @@ class SignController extends GetxController {
   void createAccount() async {
     showLoading();
     try {
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text);
+      await _credential.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
       Future.delayed(
         const Duration(milliseconds: 10),
         () {
