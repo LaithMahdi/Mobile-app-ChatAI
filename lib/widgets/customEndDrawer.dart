@@ -45,7 +45,7 @@ Drawer customEndDrawer({
           customIconButton(
             title: "Settings",
             icon: FontAwesomeIcons.gear,
-            onTap: () {},
+            onTap: () => Get.toNamed("/settings"),
           ),
           const SizedBox(height: 15),
           customIconButton(
