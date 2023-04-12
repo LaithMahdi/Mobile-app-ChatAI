@@ -20,8 +20,8 @@ class HomeController extends GetxController {
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
-    snapshot = await db.collection("users").doc(auth.currentUser!.uid).get();
-    getData();
+    //snapshot = await db.collection("users").doc(auth.currentUser!.uid).get();
+    //getData();
     super.onInit();
   }
 

@@ -4,7 +4,7 @@ import 'package:chat_ai/widgets/textFormPasswordCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../../controller/signController.dart';
+import '../../controller/signInController.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/customLine.dart';
 
@@ -13,7 +13,7 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignController());
+    final controller = Get.put(SignInController());
 
     return Scaffold(
       backgroundColor: black,
@@ -65,8 +65,8 @@ class SignIn extends StatelessWidget {
                 keyboradType: TextInputType.visiblePassword,
               ),
               const SizedBox(height: 20),
-              GetBuilder<SignController>(
-                init: SignController(),
+              GetBuilder<SignInController>(
+                init: SignInController(),
                 builder: (c) => c.isload
                     ? const CircularProgressIndicator(
                         backgroundColor: lightBlue,

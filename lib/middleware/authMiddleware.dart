@@ -8,6 +8,6 @@ class AuthMiddleware extends GetMiddleware {
     if (sharedPref!.getBool("login") != false) {
       return const RouteSettings(name: '/home');
     }
-    return null;
+    return const RouteSettings(name: '/login');
   }
 }

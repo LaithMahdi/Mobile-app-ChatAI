@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Manrope",
       ),
-      initialRoute: "/onborad",
+      initialRoute: "/",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen()),
         GetPage(name: "/onborad", page: () => const OnboradingScreen()),

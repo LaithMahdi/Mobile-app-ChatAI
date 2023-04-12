@@ -1,11 +1,10 @@
-import 'package:chat_ai/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../helper/snackBar.dart';
 
-class SignController extends GetxController {
+class SignUpController extends GetxController {
   bool isload = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -30,46 +29,6 @@ class SignController extends GetxController {
     passwordController.dispose();
     emailController.dispose();
     super.dispose();
-  }
-
-  void loginAccount() async {
-    showLoading();
-    try {
-      await _credential.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      Get.offNamed("/home");
-      nameController.text = "";
-      emailController.text = "";
-      passwordController.text = "";
-      sharedPref!.setBool("login", true);
-    } on FirebaseAuthException catch (e) {
-      showLoading();
-      if (e.code == 'user-not-found') {
-        snackbar(
-          title: "Alert",
-          message: "No user found for that email.",
-          isAlert: true,
-        );
-        showLoading();
-      } else if (e.code == 'wrong-password') {
-        snackbar(
-          title: "Alert",
-          message: "Wrong password provided for that user.",
-          isAlert: true,
-        );
-        showLoading();
-      }
-    } catch (e) {
-      snackbar(
-        title: "Alert",
-        message: "$e",
-        isAlert: true,
-      );
-      showLoading();
-    }
-    showLoading();
   }
 
   void showLoading() {

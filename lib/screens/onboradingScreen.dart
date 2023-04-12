@@ -1,3 +1,4 @@
+import 'package:chat_ai/controller/onboradingController.dart';
 import 'package:chat_ai/helper/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,8 +8,8 @@ class OnboradingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnboradingController());
     return Scaffold(
-      //backgroundColor: black,
       body: Column(
         children: [
           Stack(
@@ -36,7 +37,7 @@ class OnboradingScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 50),
+          const Spacer(),
           const Text(
             "Welcome to ChatEve",
             style: TextStyle(
@@ -57,19 +58,27 @@ class OnboradingScreen extends StatelessWidget {
           ),
           const SizedBox(height: 25),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               customFirstButton(
                 name: "Sign Up",
                 isBorder: true,
-                onTap: () {},
+                onTap: () {
+                  Get.offNamed("/signUp");
+                  controller.setClick();
+                },
               ),
               customFirstButton(
                 name: "Log In",
                 isBorder: false,
-                onTap: () {},
+                onTap: () {
+                  Get.offNamed("/login");
+                  controller.setClick();
+                },
               ),
             ],
           ),
+          const Spacer(),
         ],
       ),
     );
@@ -84,25 +93,26 @@ Widget customFirstButton({
     GestureDetector(
       onTap: onTap,
       child: Container(
+        width: Get.width * 0.45,
+        alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(
           vertical: 15,
           horizontal: 25,
         ),
         decoration: BoxDecoration(
-          border: isBorder
-              ? Border.all(
-                  color: lightBlue,
-                  width: 2,
-                )
-              : Border.all(width: 0),
+          border: Border.all(
+            color: lightBlue,
+            width: 2,
+          ),
           borderRadius: BorderRadius.circular(25),
+          color: isBorder ? Colors.transparent : lightBlue,
         ),
         child: Text(
           name,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: lightBlue,
+            color: isBorder ? lightBlue : lightGray,
           ),
         ),
       ),

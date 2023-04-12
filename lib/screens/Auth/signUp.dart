@@ -1,4 +1,4 @@
-import 'package:chat_ai/controller/signController.dart';
+import 'package:chat_ai/controller/signUpController.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -12,7 +12,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignController());
+    final controller = Get.put(SignUpController());
     return Scaffold(
       backgroundColor: black,
       body: SafeArea(
@@ -83,8 +83,8 @@ class SignUp extends StatelessWidget {
                 keyboradType: TextInputType.visiblePassword,
               ),
               const SizedBox(height: 20),
-              GetBuilder<SignController>(
-                init: SignController(),
+              GetBuilder<SignUpController>(
+                init: SignUpController(),
                 builder: (c) => c.isload
                     ? const Center(
                         child: CircularProgressIndicator(
