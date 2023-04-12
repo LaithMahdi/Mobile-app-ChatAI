@@ -1,6 +1,7 @@
 import 'package:chat_ai/screens/Auth/sigIn.dart';
 import 'package:chat_ai/screens/Auth/signUp.dart';
 import 'package:chat_ai/screens/homeScreen.dart';
+import 'package:chat_ai/screens/onboradingScreen.dart';
 import 'package:chat_ai/screens/settingsScreen.dart';
 import 'package:chat_ai/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: "Manrope",
       ),
-      initialRoute: "/",
+      initialRoute: "/onborad",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen()),
+        GetPage(name: "/onborad", page: () => const OnboradingScreen()),
         GetPage(
           name: "/login",
           page: () => const SignIn(),

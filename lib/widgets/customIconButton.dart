@@ -13,15 +13,18 @@ Widget customIconButton({
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: isBorder == false ? lightBlue : Colors.transparent,
-            width: isBorder == false ? 2 : 0,
+          border: Border(
+            left: BorderSide(
+              color: isBorder == false ? lightBlue : Colors.transparent,
+              width: isBorder == false ? 2 : 0,
+            ),
           ),
-          borderRadius: BorderRadius.circular(10),
           color: isBorder == true ? lightBlue : Colors.transparent,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: isBorder == false
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.center,
           children: [
             Icon(
               icon,
